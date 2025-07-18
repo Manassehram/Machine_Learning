@@ -7,8 +7,6 @@
 #include "camera_pins.h"
 
 // WiFi credentials for Pi Zero Hotspot
-const char* ssid = "ANDROMEDA";
-const char* password = "alpha678";
 //const char* ssid = "Pulse";
 //const char* password = "123456782";
 // Flask server endpoint (running on Pi Zero)
@@ -17,18 +15,15 @@ const char* serverUrl = "http://192.168.137.123:5000/upload";
 void connectToWiFi() {
   WiFi.begin(ssid, password);
   WiFi.setSleep(false);
-
   Serial.print("Connecting to WiFi");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
   Serial.println("\nWiFi connected!");
   Serial.print("ESP32 IP address: ");
   Serial.println(WiFi.localIP());
 }
-
 void initCamera() {
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
@@ -71,17 +66,14 @@ void initCamera() {
     Serial.printf("Camera init failed: 0x%x\n", err);
     while (true); // Stop execution if init fails
   }
-
   sensor_t* s = esp_camera_sensor_get();
   s->set_vflip(s, 0);
   s->set_brightness(s, 1);
   s->set_saturation(s, 0);
   s->set_framesize(s, FRAMESIZE_VGA);
   s->set_quality(s, config.jpeg_quality);
-
   Serial.println("Camera initialized.");
 }
-
 void uploadImage(camera_fb_t* fb) {
   HTTPClient http;
   http.begin(serverUrl);
