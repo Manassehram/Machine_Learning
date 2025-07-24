@@ -64,7 +64,18 @@ Periodic sensor checks using allsensors.py.
 Emergency alerts using telegramspy.py.
 Sensor and model outputs are combined to provide contextual feedback to the user through audio or buzzer cues.
 
-###📎 Notes
+### 📎 Notes
 GPS data is shared across scripts via gps_data.txt.
 Ensure all hardware (sensors, camera, GPS module) is connected properly.
 Telegram bot token and chat ID should be kept secure and placed in environment variables or config files for production use.
+
+### 📂 Folder Setup
+project/
+│
+├── runproject.py
+├── ml_model.py
+├── gps_to_mp3.py
+├── gpswithplacename.py
+├── telegramspy.py
+├── allsensors.py
+└── gps_data.txt
